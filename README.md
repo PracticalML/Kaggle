@@ -6,7 +6,7 @@ Collaborating on Kaggle competitions
 
 IPython notebooks and submissions (note that GitHub now directly renders IPython Notebooks in the browser. When you open the `ipynb` file it will render it. Awesome!):
 
-- `whats-cooking`: The [https://www.kaggle.com/c/whats-cooking](What's Cooking?) challenge.
+- `whats-cooking`: The [What's Cooking](https://www.kaggle.com/c/whats-cooking) challenge.
     - NN submission at the botton gets LB accuracy of 0.79133 (~385th place).
     - Good overview of how to cross-validate an elastic net based logistic regression model too.
     - Also shows how to run deep neural networks on AWS EC2 on the AMI described below.
@@ -24,10 +24,15 @@ PACKER_LOG=1 packer build --only=amazon-ebs packer/build.json
 
 ## How to run on Amazon EC2
 
-I've created an EBS-backed AMI with ID `ami-c9acb7a8` (name: `machine_learning_gpu 145254668`) which, when run on a g2.2xlarge instance, will support running deep neural network machine learning models. An example of this is contained in the "What's Cooking" directory.
+I've created an EBS-backed AMI with ID `ami-c9acb7a8` (name: `machine_learning_gpu 145254668`) in region `us-west-2` which, when run on a g2.2xlarge instance, will support running deep neural network machine learning models. An example of this is contained in the "What's Cooking" directory.
+
+One-click link to start launching an instance of this AMI is here:
+
+https://console.aws.amazon.com/ec2/home?region=us-west-2#launchAmi=ami-c9acb7a8
 
 Note that when you launch this AMI:
 
+- Since I've created the AMI in `us-west-2` you must use an EC2 keypair created in `us-west-2`, and also launch your instances there too. If needed I can make the instance in different regions too.
 - Set up the security group to allow access to TCP port 8192.
 - When the instance is launched use the public DNS entry to access `http://<public DNS name>:8192`. This will give you access to a IPython Notebook server.
 
