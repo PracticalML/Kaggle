@@ -4,6 +4,15 @@ Collaborating on Kaggle competitions
 
 ## Repo contents
 
+IPython notebooks and submissions:
+
+- `whats-cooking`: The [https://www.kaggle.com/c/whats-cooking](What's Cooking?) challenge.
+    - NN submission at the botton gets LB accuracy of 0.79133 (~385th place).
+    - Good overview of how to cross-validate an elastic net based logistic regression model too.
+    - Also shows how to run deep neural networks on AWS EC2 on the AMI described below.
+
+Other utilities:
+
 - `packer` contains configuration required to get Packer to generate an Amazon EC2 AMI for g2.2xlarge instances to enable running machine learning tasks on Theano-based packages, e.g. Lasagne and keras.
     - To use it run:
 
