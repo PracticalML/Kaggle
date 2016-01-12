@@ -12,3 +12,13 @@ export AWS_ACCESS_KEY_ID=MY_ACCESS_KEY
 export AWS_SECURE_ACCESS_KEY=MY_SECURE_ACCESS_KEY
 PACKER_LOG=1 packer build --only=amazon-ebs packer/build.json
 ```
+
+## How to run on Amazon EC2
+
+I've created an EBS-backed AMI with ID `ami-c9acb7a8` (name: `machine_learning_gpu 145254668`) which, when run on a g2.2xlarge instance, will support running deep neural network machine learning models. An example of this is contained in the "What's Cooking" directory.
+
+Note that when you launch this AMI:
+
+- Set up the security group to allow access to TCP port 8192.
+- When the instance is launched use the public DNS entry to access `http://<public DNS name>:8192`. This will give you access to a IPython Notebook server.
+
