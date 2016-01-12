@@ -4,7 +4,7 @@ Collaborating on Kaggle competitions
 
 ## Repo contents
 
-IPython notebooks and submissions:
+IPython notebooks and submissions (note that GitHub now directly renders IPython Notebooks in the browser. When you open the `ipynb` file it will render it. Awesome!):
 
 - `whats-cooking`: The [https://www.kaggle.com/c/whats-cooking](What's Cooking?) challenge.
     - NN submission at the botton gets LB accuracy of 0.79133 (~385th place).
