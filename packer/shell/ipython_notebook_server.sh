@@ -2,10 +2,14 @@
 
 set -e
 
-# test that gpu config works
-/home/ubuntu/miniconda/bin/python /home/ubuntu/miniconda/lib/python2.*/site-packages/theano/misc/check_blas.py
+# in bash profile
+export PATH=/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/home/ubuntu/anaconda/bin/python
 
-IPYTHON=$HOME/miniconda/bin/ipython
+# test that gpu config works
+/home/ubuntu/anaconda/lib/python2.*/site-packages/theano/misc/check_blas.py
+
+IPYTHON=$HOME/anaconda/bin/ipython
 eval $IPYTHON profile create keras
 CONFIG_PATH=$($IPYTHON locate profile keras)/ipython_notebook_config.py
 
@@ -45,7 +49,7 @@ serverurl=unix:///tmp/supervisor.sock         ; use a unix:// URL  for a unix so
 directory=/home/ubuntu
 environment=HOME="/home/ubuntu",USER="ubuntu",PATH=/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games,LD_LIBRARY_PATH=/usr/local/cuda/lib64:
 user=ubuntu
-command=/home/ubuntu/miniconda/bin/ipython notebook --config /home/ubuntu/.ipython/profile_keras/ipython_notebook_config.py
+command=/home/ubuntu/anaconda/bin/ipython notebook --config /home/ubuntu/.ipython/profile_keras/ipython_notebook_config.py
 stderr_logfile = /tmp/ipython-stderr.log
 stdout_logfile = /tmp/ipython-stdout.log
 EOF
@@ -66,7 +70,7 @@ env LANG=en_US.UTF-8
 env LC_CTYPE=en_US.UTF-8
 
 script
-    exec /home/ubuntu/miniconda/bin/supervisord -c /home/ubuntu/supervisord.conf
+    exec /home/ubuntu/anaconda/bin/supervisord -c /home/ubuntu/supervisord.conf
 end script
 EOF
 init-checkconf /etc/init/supervisord.conf

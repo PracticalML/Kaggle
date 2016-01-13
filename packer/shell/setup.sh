@@ -5,19 +5,29 @@ set -e
 # update OS
 sudo apt-get -y update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
-sudo apt-get install -y gcc g++ gfortran build-essential git wget linux-image-generic libopenblas-dev htop
+sudo apt-get install -y gcc g++ gfortran build-essential git wget \
+    linux-image-generic libopenblas-dev htop
 
-# install miniconda, most dependencies (except keras)
+# install anaconda, most dependencies (except keras)
 cd $HOME
-wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
-bash Miniconda-latest-Linux-x86_64.sh -b -p $HOME/miniconda -f
-rm -f Miniconda-latest-Linux-x86_64.sh
-CONDA=$HOME/miniconda/bin/conda
-eval $CONDA install -y ipython ipython-notebook pandas numpy scipy matplotlib scikit-learn supervisor cython
+
+ANACONDA_INSTALLER=Anaconda2-2.4.1-Linux-x86_64.sh
+wget https://repo.continuum.io/archive/$ANACONDA_INSTALLER
+bash $ANACONDA_INSTALLER -b -p $HOME/anaconda -f
+rm -f $ANACONDA_INSTALLER
+CONDA=$HOME/anaconda/bin/conda
+$CONDA install -y ipython ipython-notebook pandas numpy scipy matplotlib \
+    scikit-learn supervisor cython nltk
 
 # install bleeding edge of theano
-PIP=$HOME/miniconda/bin/pip
+PIP=$HOME/anaconda/bin/pip
 $PIP install --upgrade --no-deps git+git://github.com/Theano/Theano.git
+
+# other modules
+$PIP install beautifulsoup4 ml_metrics xgboost hyperopt
+$CONDA install -y seaborn
+PYTHON=$HOME/anaconda/bin/python
+$PYTHON -c "import nltk; nltk.download('all')"
 
 cat >> $HOME/.bashrc <<EOF
 export PATH=/usr/local/cuda/bin:$PATH

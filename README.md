@@ -24,16 +24,16 @@ PACKER_LOG=1 packer build --only=amazon-ebs packer/build.json
 
 ## How to run on Amazon EC2
 
-I've created an EBS-backed AMI with ID `ami-c9acb7a8` (name: `machine_learning_gpu 145254668`) in region `us-west-2` which, when run on a g2.2xlarge instance, will support running deep neural network machine learning models. An example of this is contained in the "What's Cooking" directory.
+I've created an EBS-backed AMI with ID `ami-ada3f8c7` in region `us-east-1` which, when run on a g2.2xlarge instance, will support running deep neural network machine learning models. An example of this is contained in the "What's Cooking" directory.
 
 One-click link to start launching an instance of this AMI is here:
 
-https://console.aws.amazon.com/ec2/home?region=us-west-2#launchAmi=ami-c9acb7a8
+https://console.aws.amazon.com/ec2/home?region=us-east-1#launchAmi=ami-ada3f8c7
 
 Note that when you launch this AMI:
 
 - Only launch this AMI on a `g2.2xlarge` instance.
-- Since I've created the AMI in `us-west-2` you must use an EC2 keypair created in `us-west-2`, and also launch your instances there too. If needed I can make the instance in different regions too.
+- Since I've created the AMI in `us-east-1` you must use an EC2 keypair created in `us-east-1`, and also launch your instances there too. If needed I can make the instance in different regions too.
 - Set up the security group to allow access to TCP port 8192.
 - When the instance is launched use the public DNS entry to access `http://<public DNS name>:8192`. This will give you access to a IPython Notebook server.
 
